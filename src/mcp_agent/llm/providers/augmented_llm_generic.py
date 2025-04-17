@@ -10,8 +10,10 @@ DEFAULT_OLLAMA_API_KEY = "ollama"
 
 
 class GenericAugmentedLLM(OpenAIAugmentedLLM):
-    def __init__(self, *args, provider=Provider.GENERIC, **kwargs) -> None:
-        super().__init__(*args, **kwargs)  # Properly pass args and kwargs to parent
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(
+            *args, provider=Provider.GENERIC, **kwargs
+        )  # Properly pass args and kwargs to parent
 
     def _initialize_default_params(self, kwargs: dict) -> RequestParams:
         """Initialize Generic  parameters"""
