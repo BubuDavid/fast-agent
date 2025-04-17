@@ -169,6 +169,10 @@ class OpenAIAugmentedLLM(AugmentedLLM[ChatCompletionMessageParam, ChatCompletion
             if params.metadata:
                 arguments = {**arguments, **params.metadata}
 
+            if openai_config := self.context.config.openai:
+                if hasattr(openai_config, "extra_params"):
+                    arguments = {**arguments, **openai_config.extra_params}
+
             self.logger.debug(f"{arguments}")
             self._log_chat_progress(self.chat_turn(), model=model)
 
